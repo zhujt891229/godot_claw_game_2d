@@ -1,0 +1,18 @@
+[gd_resource type="TileSet" load_steps=2 format=3 uid="uid://terrain123"]
+
+[ext_resource type="TileSetAtlasSource" path="res://resources/terrain_source.tres" id="1_source"]
+
+[resource]
+tile_size = Vector2i(32, 32)
+tile_shape = 0
+tile_layout = 0
+tile_offset_axis = 0
+tile_mirror = 0
+tile_orthogonal = 0
+tile_spacing = 0
+tile_margin = 0
+sources = [SubResource("TileSetAtlasSource_1")]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1"]
+texture = ExtResource("1_source")
+tile_size = Vector2i(32, 32)

@@ -1,0 +1,20 @@
+# Godot 4.x .gitignore
+
+# Godot 4+ specific files
+.godot/
+*.import
+*.tmp
+
+# Project settings backup
+project.godot.bak
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Build exports
+builds/
+exports/

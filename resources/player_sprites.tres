@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://playerframes123"]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Animations/Player/Idle.png" id="1_idle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Animations/Player/Run.png" id="2_run"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Animations/Player/Jump.png" id="3_jump"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Animations/Player/Die.png" id="4_die"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Animations/Player/Hit_Stand.png" id="5_hit_stand"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Animations/Player/Hit_Jump.png" id="6_hit_jump"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_idle")
+}],
+"loop": true,
+"name": "idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_run")
+}],
+"loop": true,
+"name": "run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jump")
+}],
+"loop": false,
+"name": "jump",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_die")
+}],
+"loop": false,
+"name": "die",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_hit_stand")
+}],
+"loop": false,
+"name": "hit",
+"speed": 12.0
+}]
