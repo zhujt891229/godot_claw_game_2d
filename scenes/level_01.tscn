@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cgxq8jcnof14q" path="res://scenes/player.tscn" id="1_bpt1m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
-size = Vector2(400, 16)
+size = Vector2(800, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
 size = Vector2(96, 16)
@@ -29,8 +29,8 @@ collision_layer = 3
 collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=1913383225]
-modulate = Color(0.5, 0.4, 0.3, 1)
-scale = Vector2(6.25, 1)
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(12.5, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=530174641]
 shape = SubResource("RectangleShape2D_ground")
