@@ -1,13 +1,13 @@
-[gd_scene format=3 uid="uid://b1f2s3d4f5g6h7"]
+[gd_scene format=3 uid="uid://cgxq8jcnof14q"]
 
 [ext_resource type="Script" uid="uid://0tfo8klnqexl" path="res://scripts/player.gd" id="1_player"]
 [ext_resource type="SpriteFrames" uid="uid://bxq7w2o412u5g" path="res://resources/player_sprites.tres" id="2_sprites"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(16, 32)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
+radius = 15.0
+height = 95.0
 
 [node name="Player" type="CharacterBody2D" unique_id=932062820]
-collision_layer = 1
 collision_mask = 3
 script = ExtResource("1_player")
 
@@ -15,11 +15,11 @@ script = ExtResource("1_player")
 position = Vector2(0, -16)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_sprites")
-animation = &"die"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1059633060]
-shape = SubResource("RectangleShape2D_1")
+shape = SubResource("CapsuleShape2D_g2els")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=918438758]
 position_smoothing_enabled = true
