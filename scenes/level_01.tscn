@@ -1,24 +1,128 @@
 [gd_scene format=3 uid="uid://cwfunnomdrfb0"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_fyfor"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(400, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpt1m"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
+size = Vector2(16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_checkpoint"]
+size = Vector2(32, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spike"]
+size = Vector2(16, 16)
 
 [node name="Level01" type="Node2D" unique_id=2079575397]
 
 [node name="Background" type="ColorRect" parent="." unique_id=840277540]
-offset_right = 40.0
-offset_bottom = 40.0
-pivot_offset = Vector2(-500, -300)
-pivot_offset_ratio = Vector2(500, 300)
-color = Color(0.4509804, 0.54901963, 0.7529412, 1)
+offset_left = -500.0
+offset_top = -300.0
+offset_right = 500.0
+offset_bottom = 300.0
+color = Color(0.45, 0.55, 0.75, 1)
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1404074761]
 position = Vector2(0, 200)
+collision_layer = 3
+collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=1913383225]
-texture = SubResource("ImageTexture_fyfor")
+scale = Vector2(6.25, 1)
+modulate = Color(0.5, 0.4, 0.3, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=530174641]
-position = Vector2(20, -200)
-shape = SubResource("RectangleShape2D_bpt1m")
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="Platform1" type="StaticBody2D" parent="." unique_id=1000000006]
+position = Vector2(-200, 80)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform1" unique_id=1000000007]
+scale = Vector2(1.5, 1)
+modulate = Color(0.5, 0.4, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=1000000008]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Platform2" type="StaticBody2D" parent="." unique_id=1000000009]
+position = Vector2(50, 0)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2" unique_id=1000000010]
+scale = Vector2(1.5, 1)
+modulate = Color(0.5, 0.4, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=1000000011]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Platform3" type="StaticBody2D" parent="." unique_id=1000000012]
+position = Vector2(300, -80)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform3" unique_id=1000000013]
+scale = Vector2(1.5, 1)
+modulate = Color(0.5, 0.4, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1000000014]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1000000015]
+position = Vector2(-350, -50)
+collision_layer = 1
+collision_mask = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1000000016]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1000000017]
+shape = SubResource("RectangleShape2D_player")
+
+[node name="Checkpoint1" type="Area2D" parent="." unique_id=1000000018]
+position = Vector2(100, -50)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Checkpoint1" unique_id=1000000019]
+scale = Vector2(0.5, 0.5)
+modulate = Color(1, 0.8, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1" unique_id=1000000020]
+shape = SubResource("RectangleShape2D_checkpoint")
+
+[node name="Spike1" type="Area2D" parent="." unique_id=1000000021]
+position = Vector2(-100, 184)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike1" unique_id=1000000022]
+modulate = Color(0.8, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike1" unique_id=1000000023]
+shape = SubResource("RectangleShape2D_spike")
+
+[node name="Spike2" type="Area2D" parent="." unique_id=1000000024]
+position = Vector2(200, 184)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike2" unique_id=1000000025]
+modulate = Color(0.8, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike2" unique_id=1000000026]
+shape = SubResource("RectangleShape2D_spike")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1000000027]
+position_smoothing_enabled = true
+position_smoothing_speed = 5.0
+limit_left = -500
+limit_top = -300
+limit_right = 500
+limit_bottom = 300
