@@ -17,7 +17,7 @@
 
 ### 步骤 1: 打开关卡场景
 
-1. 启动 Godot 4.x
+1. 启动 Godot 4.6
 2. 打开项目
 3. 双击 `scenes/level_01.tscn`
 

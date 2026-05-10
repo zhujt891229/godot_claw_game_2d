@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 ## 玩家控制脚本
-## 适用于 Godot 4.x 2D 横版平台跳跃游戏
+## 适用于 Godot 4.6 2D 横版平台跳跃游戏
 ## 支持 AnimatedSprite2D 动画播放
 
 # === 导出参数 (可在编辑器中调整) ===

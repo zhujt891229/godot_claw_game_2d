@@ -1,4 +1,4 @@
-# 2D Platformer - Godot 4.x 项目
+# 2D Platformer - Godot 4.6 项目
 
 🦐 像素风横版平台跳跃游戏模板
 
@@ -34,7 +34,7 @@ godot-game/
 
 ## 快速开始
 
-1. 用 Godot 4.x 打开 `project.godot`
+1. 用 Godot 4.6 打开 `project.godot`
 2. 运行主场景 (`scenes/main.tscn`)
 3. 添加瓦片素材到 `resources/terrain_source.tres`
 4. 在 TileMapLayer 上绘制关卡

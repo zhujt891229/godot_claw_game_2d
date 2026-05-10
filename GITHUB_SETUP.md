@@ -8,7 +8,7 @@
 2. 点击右上角 `+` → `New repository`
 3. 填写信息：
    - **Repository name**: `godot-platformer` (或你喜欢的名字)
-   - **Description**: `2D Platformer Game made with Godot 4.x`
+   - **Description**: `2D Platformer Game made with Godot 4.6`
    - **Public/Private**: 根据需求选择
    - **不要勾选** "Initialize this repository with a README"
 4. 点击 `Create repository`
@@ -30,7 +30,7 @@ git init
 git add .
 
 # 第一次提交
-git commit -m "Initial commit: Godot 4.x 2D platformer project"
+git commit -m "Initial commit: Godot 4.6 2D platformer project"
 ```
 
 ---

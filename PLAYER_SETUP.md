@@ -13,7 +13,7 @@
 
 ### 步骤 1: 打开玩家场景
 
-1. 启动 Godot 4.x
+1. 启动 Godot 4.6
 2. 导入项目 (选择 `project.godot`)
 3. 双击打开 `scenes/player.tscn`
 
