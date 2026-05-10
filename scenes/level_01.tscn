@@ -1,68 +1,24 @@
-[gd_scene format=3 uid="uid://level01new"]
+[gd_scene format=3 uid="uid://cwfunnomdrfb0"]
 
-[node name="Level01" type="Node2D" unique_id=1000000001]
+[sub_resource type="ImageTexture" id="ImageTexture_fyfor"]
 
-[node name="Background" type="ColorRect" parent="." unique_id=1000000002]
-offset_left = -500.0
-offset_top = -300.0
-offset_right = 500.0
-offset_bottom = 300.0
-color = Color(0.45, 0.55, 0.75, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpt1m"]
 
-[node name="Ground" type="StaticBody2D" parent="." unique_id=1000000003]
+[node name="Level01" type="Node2D" unique_id=2079575397]
+
+[node name="Background" type="ColorRect" parent="." unique_id=840277540]
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(-500, -300)
+pivot_offset_ratio = Vector2(500, 300)
+color = Color(0.4509804, 0.54901963, 0.7529412, 1)
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1404074761]
 position = Vector2(0, 200)
-collision_layer = 3
-collision_mask = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=1000000004]
-scale = Vector2(6.25, 1)
+[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=1913383225]
+texture = SubResource("ImageTexture_fyfor")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=1000000005]
-shape = SubResource("RectangleShape2D_ground")
-
-[node name="Platform1" type="StaticBody2D" parent="." unique_id=1000000006]
-position = Vector2(-150, 50)
-collision_layer = 3
-collision_mask = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="Platform1" unique_id=1000000007]
-scale = Vector2(1.5, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=1000000008]
-shape = SubResource("RectangleShape2D_platform")
-
-[node name="Platform2" type="StaticBody2D" parent="." unique_id=1000000009]
-position = Vector2(150, -20)
-collision_layer = 3
-collision_mask = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="Platform2" unique_id=1000000010]
-scale = Vector2(1.5, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=1000000011]
-shape = SubResource("RectangleShape2D_platform")
-
-[node name="Platform3" type="StaticBody2D" parent="." unique_id=1000000012]
-position = Vector2(350, 80)
-collision_layer = 3
-collision_mask = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="Platform3" unique_id=1000000013]
-scale = Vector2(1.5, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1000000014]
-shape = SubResource("RectangleShape2D_platform")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1000000015]
-position_smoothing_enabled = true
-position_smoothing_speed = 5.0
-limit_left = -500
-limit_top = -300
-limit_right = 500
-limit_bottom = 300
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
-size = Vector2(400, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
-size = Vector2(96, 16)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=530174641]
+position = Vector2(20, -200)
+shape = SubResource("RectangleShape2D_bpt1m")
