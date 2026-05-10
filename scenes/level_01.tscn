@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://level01abc"]
+[gd_scene load_steps=6 format=3 uid="uid://level01abc"]
 
-[ext_resource type="PackedScene" uid="uid://b1f2s3d4f5g6h7" path="res://scenes/player.tscn" id="1_player"]
-[ext_resource type="Script" uid="uid://cqh2cnheiaqpp" path="res://scripts/level_manager.gd" id="2_level_manager"]
-[ext_resource type="Script" uid="uid://ch0x0fd1xcgm" path="res://scripts/checkpoint.gd" id="3_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="2_level_manager"]
+[ext_resource type="Script" path="res://scripts/checkpoint.gd" id="3_checkpoint"]
 [ext_resource type="Texture2D" path="res://assets/sprites/Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="4_tilemap"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
