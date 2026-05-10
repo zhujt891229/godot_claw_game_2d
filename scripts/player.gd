@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var gravity: float = 980.0
 @export var coyote_time: float = 0.1  # 边缘缓冲时间
 @export var jump_buffer_time: float = 0.1  # 跳跃缓冲时间
+@export var can_double_jump: bool = true  # 是否允许二段跳
 
 # === 状态变量 ===
 var is_on_ground: bool = false
@@ -18,6 +19,8 @@ var jump_buffer_timer: float = 0.0
 var is_dead: bool = false
 var is_hurt: bool = false
 var hurt_timer: float = 0.0
+var jump_count: int = 0  # 跳跃次数（用于二段跳）
+var max_jumps: int = 2  # 最大跳跃次数
 
 # === 节点引用 ===
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -62,18 +65,34 @@ func _physics_process(delta: float) -> void:
 	
 	# 跳跃 (使用缓冲和边缘时间)
 	if jump_buffer_timer > 0 and coyote_timer > 0:
-		velocity.y = jump_velocity
+		_perform_jump()
 		jump_buffer_timer = 0
 		coyote_timer = 0
+	
+	# 二段跳 (在空中再次跳跃)
+	elif jump_buffer_timer > 0 and not is_on_floor() and can_double_jump and jump_count < max_jumps:
+		_perform_jump()
 	
 	# 移动并检测碰撞
 	move_and_slide()
 	
 	# 更新状态
 	is_on_ground = is_on_floor()
+	if is_on_ground:
+		jump_count = 0  # 重置跳跃次数
 	
 	# 更新动画
 	_update_animation(direction)
+
+
+## 执行跳跃
+func _perform_jump() -> void:
+	velocity.y = jump_velocity
+	jump_count += 1
+	
+	# 播放跳跃动画
+	if animated_sprite and not is_on_floor():
+		animated_sprite.play("jump")
 
 
 ## 更新动画状态
