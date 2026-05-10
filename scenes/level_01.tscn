@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://level01abc"]
 
 [ext_resource type="PackedScene" uid="uid://b1f2s3d4f5g6h7" path="res://scenes/player.tscn" id="1_player"]
-[ext_resource type="Script" uid="uid://levelmanager1" path="res://scripts/level_manager.gd" id="2_level_manager"]
-[ext_resource type="Script" uid="uid://checkpoint1" path="res://scripts/checkpoint.gd" id="3_checkpoint"]
+[ext_resource type="Script" uid="uid://cqh2cnheiaqpp" path="res://scripts/level_manager.gd" id="2_level_manager"]
+[ext_resource type="Script" uid="uid://ch0x0fd1xcgm" path="res://scripts/checkpoint.gd" id="3_checkpoint"]
 [ext_resource type="Texture2D" path="res://assets/sprites/Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="4_tilemap"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
@@ -27,11 +27,9 @@ offset_right = 500.0
 offset_bottom = 300.0
 color = Color(0.45, 0.55, 0.75, 1)
 
-; 玩家起始位置
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(-350, -50)
 
-; 主地面
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(0, 200)
 collision_layer = 3
@@ -44,7 +42,6 @@ modulate = Color(0.6, 0.5, 0.4, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("RectangleShape2D_ground")
 
-; 平台 1
 [node name="Platform1" type="StaticBody2D" parent="."]
 position = Vector2(-150, 50)
 collision_layer = 3
@@ -57,7 +54,6 @@ modulate = Color(0.6, 0.5, 0.4, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
 shape = SubResource("RectangleShape2D_platform")
 
-; 平台 2
 [node name="Platform2" type="StaticBody2D" parent="."]
 position = Vector2(150, -20)
 collision_layer = 3
@@ -70,7 +66,6 @@ modulate = Color(0.6, 0.5, 0.4, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
 shape = SubResource("RectangleShape2D_platform")
 
-; 平台 3
 [node name="Platform3" type="StaticBody2D" parent="."]
 position = Vector2(350, 80)
 collision_layer = 3
@@ -83,7 +78,6 @@ modulate = Color(0.6, 0.5, 0.4, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
 shape = SubResource("RectangleShape2D_platform")
 
-; 检查点 1
 [node name="Checkpoint1" type="Area2D" parent="."]
 position = Vector2(200, -80)
 collision_layer = 0
@@ -96,16 +90,6 @@ modulate = Color(1, 0.8, 0.2, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1"]
 shape = SubResource("RectangleShape2D_platform")
 
-[node name="Checkpoint1/Label" type="Label" parent="Checkpoint1"]
-offset_left = -40.0
-offset_top = -10.0
-offset_right = 40.0
-offset_bottom = 10.0
-text = "存档点"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-; 相机
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 5.0
