@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://player123"]
+[gd_scene format=3 uid="uid://b1f2s3d4f5g6h7"]
 
 [ext_resource type="Script" uid="uid://0tfo8klnqexl" path="res://scripts/player.gd" id="1_player"]
 [ext_resource type="SpriteFrames" uid="uid://bxq7w2o412u5g" path="res://resources/player_sprites.tres" id="2_sprites"]

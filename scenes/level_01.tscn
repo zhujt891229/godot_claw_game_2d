@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://level01"]
 
-[ext_resource type="PackedScene" uid="uid://player123" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://b1f2s3d4f5g6h7" path="res://scenes/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/level_manager.gd" id="2_level_manager"]
 [ext_resource type="Script" path="res://scripts/checkpoint.gd" id="3_checkpoint"]
 
