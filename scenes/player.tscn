@@ -1,27 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://player123"]
+[gd_scene format=3 uid="uid://player123"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_player"]
-[ext_resource type="SpriteFrames" path="res://resources/player_sprites.tres" id="2_sprites"]
+[ext_resource type="Script" uid="uid://0tfo8klnqexl" path="res://scripts/player.gd" id="1_player"]
+[ext_resource type="SpriteFrames" uid="uid://bxq7w2o412u5g" path="res://resources/player_sprites.tres" id="2_sprites"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(16, 32)
 
-[node name="Player" type="CharacterBody2D"]
-collision_layer = 1
+[node name="Player" type="CharacterBody2D" unique_id=932062820]
 collision_mask = 5
 script = ExtResource("1_player")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1205212350]
 position = Vector2(0, -16)
-sprite_frames = ExtResource("2_sprites")
-animation = "idle"
-autoplay = "idle"
 scale = Vector2(2, 2)
+sprite_frames = ExtResource("2_sprites")
+animation = &"die"
+autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1059633060]
 shape = SubResource("RectangleShape2D_1")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=918438758]
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
