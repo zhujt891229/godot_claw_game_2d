@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cwfunnomdrfb0"]
 
 [ext_resource type="PackedScene" uid="uid://cgxq8jcnof14q" path="res://scenes/player.tscn" id="1_player"]
-[ext_resource type="Texture2D" uid="uid://dhiaugx0yxtf0" path="res://assets/sprites/Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="2_4lj41"]
+[ext_resource type="Texture2D" uid="uid://dhiaugx0yxtf0" path="res://assets/sprites/Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="2_texture"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(800, 16)
@@ -16,7 +16,7 @@ size = Vector2(32, 48)
 size = Vector2(16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mofoo"]
-texture = ExtResource("2_4lj41")
+texture = ExtResource("2_texture")
 1:1/0 = 0
 3:1/0 = 0
 4:1/0 = 0
@@ -90,6 +90,7 @@ offset_right = 960.0
 offset_bottom = 540.0
 color = Color(0.45, 0.55, 0.75, 1)
 
+; 主地面
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1404074761]
 position = Vector2(0, 200)
 collision_layer = 3
@@ -102,6 +103,7 @@ scale = Vector2(12.5, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=530174641]
 shape = SubResource("RectangleShape2D_ground")
 
+; 平台 1 - 左侧起始平台
 [node name="Platform1" type="StaticBody2D" parent="." unique_id=1000000006]
 position = Vector2(-240, 120)
 collision_layer = 3
@@ -114,6 +116,7 @@ scale = Vector2(1.5, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=1000000008]
 shape = SubResource("RectangleShape2D_platform")
 
+; 平台 2 - 中间平台
 [node name="Platform2" type="StaticBody2D" parent="." unique_id=1000000009]
 position = Vector2(50, 0)
 collision_layer = 3
@@ -126,6 +129,7 @@ scale = Vector2(1.5, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=1000000011]
 shape = SubResource("RectangleShape2D_platform")
 
+; 平台 3 - 右侧高台
 [node name="Platform3" type="StaticBody2D" parent="." unique_id=1000000012]
 position = Vector2(300, -80)
 collision_layer = 3
@@ -138,9 +142,24 @@ scale = Vector2(1.5, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1000000014]
 shape = SubResource("RectangleShape2D_platform")
 
+; 平台 4 - 最右侧平台
+[node name="Platform4" type="StaticBody2D" parent="." unique_id=1000000030]
+position = Vector2(500, 50)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform4" unique_id=1000000031]
+modulate = Color(0.5, 0.4, 0.3, 1)
+scale = Vector2(1.5, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4" unique_id=1000000032]
+shape = SubResource("RectangleShape2D_platform")
+
+; 检查点 1 - 第一个存档点
 [node name="Checkpoint1" type="Area2D" parent="." unique_id=1000000018]
 position = Vector2(100, -50)
 collision_layer = 0
+collision_mask = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Checkpoint1" unique_id=1000000019]
 modulate = Color(1, 0.8, 0.2, 1)
@@ -149,9 +168,24 @@ scale = Vector2(0.5, 0.5)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1" unique_id=1000000020]
 shape = SubResource("RectangleShape2D_checkpoint")
 
+; 检查点 2 - 第二个存档点
+[node name="Checkpoint2" type="Area2D" parent="." unique_id=1000000040]
+position = Vector2(450, 0)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Checkpoint2" unique_id=1000000041]
+modulate = Color(1, 0.8, 0.2, 1)
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2" unique_id=1000000042]
+shape = SubResource("RectangleShape2D_checkpoint")
+
+; 尖刺 1 - 左侧陷阱
 [node name="Spike1" type="Area2D" parent="." unique_id=1000000021]
 position = Vector2(-100, 184)
 collision_layer = 0
+collision_mask = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Spike1" unique_id=1000000022]
 modulate = Color(0.8, 0.2, 0.2, 1)
@@ -159,9 +193,11 @@ modulate = Color(0.8, 0.2, 0.2, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spike1" unique_id=1000000023]
 shape = SubResource("RectangleShape2D_spike")
 
+; 尖刺 2 - 中间陷阱
 [node name="Spike2" type="Area2D" parent="." unique_id=1000000024]
 position = Vector2(200, 184)
 collision_layer = 0
+collision_mask = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Spike2" unique_id=1000000025]
 modulate = Color(0.8, 0.2, 0.2, 1)
@@ -169,16 +205,54 @@ modulate = Color(0.8, 0.2, 0.2, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spike2" unique_id=1000000026]
 shape = SubResource("RectangleShape2D_spike")
 
+; 尖刺 3 - 右侧陷阱
+[node name="Spike3" type="Area2D" parent="." unique_id=1000000050]
+position = Vector2(400, 184)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike3" unique_id=1000000051]
+modulate = Color(0.8, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike3" unique_id=1000000052]
+shape = SubResource("RectangleShape2D_spike")
+
+; 瓦片地图层
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=150267697]
+tile_map_data = PackedByteArray("AADn/wwAAAADAAMAAADo/wwAAAAEAAMAAADp/wwAAAAFAAMAAADq/wwAAAADAAMAAADr/wwAAAAEAAMAAADs/wwAAAAFAAMAAADt/wwAAAADAAMAAADu/wwAAAAEAAMAAADv/wwAAAAFAAMAAADw/wwAAAADAAMAAADx/wwAAAAEAAMAAADy/wwAAAAFAAMAAADz/wwAAAADAAMAAAD0/wwAAAAEAAMAAAD1/wwAAAAFAAMAAAD2/wwAAAADAAMAAAD3/wwAAAAEAAMAAAD4/wwAAAAFAAMAAAD5/wwAAAADAAMAAAD6/wwAAAAEAAMAAAD7/wwAAAAFAAMAAAD8/wwAAAADAAMAAAD9/wwAAAAEAAMAAAD+/wwAAAAFAAMAAAD//wwAAAADAAMAAAAAAAwAAAAEAAMAAAABAAwAAAAFAAMAAAACAAwAAAADAAMAAAADAAwAAAAEAAMAAAAEAAwAAAAFAAMAAAAFAAwAAAADAAMAAAAGAAwAAAAEAAMAAAAHAAwAAAAFAAMAAAAIAAwAAAADAAMAAAAJAAwAAAAEAAMAAAAKAAwAAAAFAAMAAAALAAwAAAADAAMAAAAMAAwAAAAEAAMAAAANAAwAAAAFAAMAAAAOAAwAAAADAAMAAAAPAAwAAAAEAAMAAAAQAAwAAAAFAAMAAAARAAwAAAADAAMAAAASAAwAAAAEAAMAAAATAAwAAAAFAAMAAAAUAAwAAAADAAMAAAAVAAwAAAADAAMAAAAWAAwAAAADAAMAAAAXAAwAAAAEAAMAAAAYAAwAAAAFAAMAAADu/wcAAAADAAMAAADv/wcAAAAEAAMAAADw/wcAAAAFAAMAAADx/wcAAAADAAMAAADy/wcAAAAEAAMAAADz/wcAAAAFAAMAAAA=")
+tile_set = SubResource("TileSet_nr3cb")
+
+; 相机
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1000000027]
 limit_left = -960
 limit_top = -540
 limit_right = 960
 limit_bottom = 540
 position_smoothing_enabled = true
+position_smoothing_speed = 5.0
 
+; 玩家实例
 [node name="Player" parent="." unique_id=932062820 instance=ExtResource("1_player")]
-position = Vector2(-350, -50)
+position = Vector2(-400, -100)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=150267697]
-tile_map_data = PackedByteArray("AADn/wwAAAADAAMAAADo/wwAAAAEAAMAAADp/wwAAAAFAAMAAADq/wwAAAADAAMAAADr/wwAAAAEAAMAAADs/wwAAAAFAAMAAADt/wwAAAADAAMAAADu/wwAAAAEAAMAAADv/wwAAAAFAAMAAADw/wwAAAADAAMAAADx/wwAAAAEAAMAAADy/wwAAAAFAAMAAADz/wwAAAADAAMAAAD0/wwAAAAEAAMAAAD1/wwAAAAFAAMAAAD2/wwAAAADAAMAAAD3/wwAAAAEAAMAAAD4/wwAAAAFAAMAAAD5/wwAAAADAAMAAAD6/wwAAAAEAAMAAAD7/wwAAAAFAAMAAAD8/wwAAAADAAMAAAD9/wwAAAAEAAMAAAD+/wwAAAAFAAMAAAD//wwAAAADAAMAAAAAAAwAAAAEAAMAAAABAAwAAAAFAAMAAAACAAwAAAADAAMAAAADAAwAAAAEAAMAAAAEAAwAAAAFAAMAAAAFAAwAAAADAAMAAAAGAAwAAAAEAAMAAAAHAAwAAAAFAAMAAAAIAAwAAAADAAMAAAAJAAwAAAAEAAMAAAAKAAwAAAAFAAMAAAALAAwAAAADAAMAAAAMAAwAAAAEAAMAAAANAAwAAAAFAAMAAAAOAAwAAAADAAMAAAAPAAwAAAAEAAMAAAAQAAwAAAAFAAMAAAARAAwAAAADAAMAAAASAAwAAAAEAAMAAAATAAwAAAAFAAMAAAAUAAwAAAADAAMAAAAVAAwAAAADAAMAAAAWAAwAAAADAAMAAAAXAAwAAAAEAAMAAAAYAAwAAAAFAAMAAADu/wcAAAADAAMAAADv/wcAAAAEAAMAAADw/wcAAAAFAAMAAADx/wcAAAADAAMAAADy/wcAAAAEAAMAAADz/wcAAAAFAAMAAAA=")
-tile_set = SubResource("TileSet_nr3cb")
+; 终点旗帜
+[node name="Flag" type="Area2D" parent="." unique_id=1000000060]
+position = Vector2(700, -50)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Flag" unique_id=1000000061]
+modulate = Color(0.2, 1, 0.2, 1)
+scale = Vector2(1, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flag" unique_id=1000000062]
+shape = SubResource("RectangleShape2D_checkpoint")
+
+[node name="Flag/Label" type="Label" parent="Flag" unique_id=1000000063]
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -10.0
+text = "终点"
+horizontal_alignment = 1
+vertical_alignment = 1
