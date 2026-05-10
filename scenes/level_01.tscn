@@ -5,7 +5,14 @@
 [ext_resource type="Script" path="res://scripts/checkpoint.gd" id="3_checkpoint"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
-size = Vector2(800, 32)
+size = Vector2(400, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ground"]
+atlas = ExtResource("1_tilemap")
+region = Rect2(0, 0, 64, 64)
+margin = Vector2(8, 48)
+
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="1_tilemap"]
 
 [node name="Level01" type="Node2D"]
 
@@ -27,8 +34,15 @@ tile_set = null
 
 [node name="Ground" type="StaticBody2D" parent="TileMapLayer"]
 position = Vector2(0, 150)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+texture = SubResource("AtlasTexture_ground")
+modulate = Color(0.6, 0.5, 0.4, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="SpawnPoint1" type="Node2D" parent="."]

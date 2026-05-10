@@ -11,6 +11,39 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"region": Rect2(0, 0, 64, 64),
+"texture": ExtResource("1_idle")
+}, {
+"duration": 1.0,
+"region": Rect2(64, 0, 64, 64),
+"texture": ExtResource("1_idle")
+}, {
+"duration": 1.0,
+"region": Rect2(128, 0, 64, 64),
+"texture": ExtResource("1_idle")
+}, {
+"duration": 1.0,
+"region": Rect2(192, 0, 64, 64),
+"texture": ExtResource("1_idle")
+}, {
+"duration": 1.0,
+"region": Rect2(256, 0, 64, 64),
+"texture": ExtResource("1_idle")
+}, {
+"duration": 1.0,
+"region": Rect2(320, 0, 64, 64),
+"texture": ExtResource("1_idle")
+}, {
+"duration": 1.0,
+"region": Rect2(384, 0, 64, 64),
+"texture": ExtResource("1_idle")
+}, {
+"duration": 1.0,
+"region": Rect2(448, 0, 64, 64),
+"texture": ExtResource("1_idle")
+}, {
+"duration": 1.0,
+"region": Rect2(512, 0, 64, 64),
 "texture": ExtResource("1_idle")
 }],
 "loop": true,
@@ -19,6 +52,39 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"region": Rect2(0, 0, 64, 64),
+"texture": ExtResource("2_run")
+}, {
+"duration": 1.0,
+"region": Rect2(64, 0, 64, 64),
+"texture": ExtResource("2_run")
+}, {
+"duration": 1.0,
+"region": Rect2(128, 0, 64, 64),
+"texture": ExtResource("2_run")
+}, {
+"duration": 1.0,
+"region": Rect2(192, 0, 64, 64),
+"texture": ExtResource("2_run")
+}, {
+"duration": 1.0,
+"region": Rect2(256, 0, 64, 64),
+"texture": ExtResource("2_run")
+}, {
+"duration": 1.0,
+"region": Rect2(320, 0, 64, 64),
+"texture": ExtResource("2_run")
+}, {
+"duration": 1.0,
+"region": Rect2(384, 0, 64, 64),
+"texture": ExtResource("2_run")
+}, {
+"duration": 1.0,
+"region": Rect2(448, 0, 64, 64),
+"texture": ExtResource("2_run")
+}, {
+"duration": 1.0,
+"region": Rect2(512, 0, 64, 64),
 "texture": ExtResource("2_run")
 }],
 "loop": true,
@@ -27,6 +93,43 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"region": Rect2(0, 0, 64, 64),
+"texture": ExtResource("3_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(64, 0, 64, 64),
+"texture": ExtResource("3_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(128, 0, 64, 64),
+"texture": ExtResource("3_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(192, 0, 64, 64),
+"texture": ExtResource("3_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(256, 0, 64, 64),
+"texture": ExtResource("3_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(320, 0, 64, 64),
+"texture": ExtResource("3_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(384, 0, 64, 64),
+"texture": ExtResource("3_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(448, 0, 64, 64),
+"texture": ExtResource("3_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(512, 0, 64, 64),
+"texture": ExtResource("3_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(576, 0, 64, 64),
 "texture": ExtResource("3_jump")
 }],
 "loop": false,
@@ -35,6 +138,39 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"region": Rect2(0, 0, 64, 64),
+"texture": ExtResource("4_die")
+}, {
+"duration": 1.0,
+"region": Rect2(64, 0, 64, 64),
+"texture": ExtResource("4_die")
+}, {
+"duration": 1.0,
+"region": Rect2(128, 0, 64, 64),
+"texture": ExtResource("4_die")
+}, {
+"duration": 1.0,
+"region": Rect2(192, 0, 64, 64),
+"texture": ExtResource("4_die")
+}, {
+"duration": 1.0,
+"region": Rect2(256, 0, 64, 64),
+"texture": ExtResource("4_die")
+}, {
+"duration": 1.0,
+"region": Rect2(320, 0, 64, 64),
+"texture": ExtResource("4_die")
+}, {
+"duration": 1.0,
+"region": Rect2(384, 0, 64, 64),
+"texture": ExtResource("4_die")
+}, {
+"duration": 1.0,
+"region": Rect2(448, 0, 64, 64),
+"texture": ExtResource("4_die")
+}, {
+"duration": 1.0,
+"region": Rect2(512, 0, 64, 64),
 "texture": ExtResource("4_die")
 }],
 "loop": false,
@@ -43,9 +179,59 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"region": Rect2(0, 0, 64, 64),
+"texture": ExtResource("5_hit_stand")
+}, {
+"duration": 1.0,
+"region": Rect2(64, 0, 64, 64),
+"texture": ExtResource("5_hit_stand")
+}, {
+"duration": 1.0,
+"region": Rect2(128, 0, 64, 64),
+"texture": ExtResource("5_hit_stand")
+}, {
+"duration": 1.0,
+"region": Rect2(192, 0, 64, 64),
+"texture": ExtResource("5_hit_stand")
+}, {
+"duration": 1.0,
+"region": Rect2(256, 0, 64, 64),
+"texture": ExtResource("5_hit_stand")
+}, {
+"duration": 1.0,
+"region": Rect2(320, 0, 64, 64),
 "texture": ExtResource("5_hit_stand")
 }],
 "loop": false,
-"name": "hit",
+"name": "hit_stand",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"region": Rect2(0, 0, 64, 64),
+"texture": ExtResource("6_hit_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(64, 0, 64, 64),
+"texture": ExtResource("6_hit_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(128, 0, 64, 64),
+"texture": ExtResource("6_hit_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(192, 0, 64, 64),
+"texture": ExtResource("6_hit_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(256, 0, 64, 64),
+"texture": ExtResource("6_hit_jump")
+}, {
+"duration": 1.0,
+"region": Rect2(320, 0, 64, 64),
+"texture": ExtResource("6_hit_jump")
+}],
+"loop": false,
+"name": "hit_jump",
 "speed": 12.0
 }]

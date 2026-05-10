@@ -16,6 +16,7 @@ position = Vector2(0, -16)
 sprite_frames = ExtResource("2_sprites")
 animation = "idle"
 autoplay = "idle"
+scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0)
