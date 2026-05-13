@@ -83,12 +83,46 @@ sources/0 = SubResource("TileSetAtlasSource_mofoo")
 
 [node name="Level01" type="Node2D" unique_id=2079575397]
 
-[node name="Background" type="ColorRect" parent="." unique_id=840277540]
+; 视差背景层
+[node name="ParallaxBackground" type="Parallax2D" parent="." unique_id=840277540]
+
+; 天空层 - 最远景，几乎不动
+[node name="SkyLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=840277541]
+motion_scale = Vector2(0.05, 0.05)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="SkySprite" type="ColorRect" parent="ParallaxBackground/SkyLayer" unique_id=840277542]
 offset_left = -960.0
 offset_top = -540.0
 offset_right = 960.0
 offset_bottom = 540.0
-color = Color(0.45, 0.55, 0.75, 1)
+color = Color(0.5, 0.65, 0.85, 1)
+
+; 远山层 - 慢速移动
+[node name="MountainLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=840277543]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1920, 0)
+position = Vector2(0, 100)
+
+[node name="MountainSprite" type="ColorRect" parent="ParallaxBackground/MountainLayer" unique_id=840277544]
+offset_left = -960.0
+offset_top = -440.0
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0.35, 0.45, 0.6, 1)
+
+; 中景层 - 中速移动
+[node name="MidLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=840277545]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 0)
+position = Vector2(0, 150)
+
+[node name="MidSprite" type="ColorRect" parent="ParallaxBackground/MidLayer" unique_id=840277546]
+offset_left = -960.0
+offset_top = -390.0
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0.25, 0.35, 0.5, 1)
 
 ; 主地面
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1404074761]
