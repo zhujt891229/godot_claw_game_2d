@@ -11,6 +11,8 @@ extends CharacterBody2D
 @export var coyote_time: float = 0.1  # 边缘缓冲时间
 @export var jump_buffer_time: float = 0.1  # 跳跃缓冲时间
 @export var can_double_jump: bool = true  # 是否允许二段跳
+@export var can_shoot: bool = true  # 是否允许射击
+@export var shoot_cooldown: float = 0.3  # 射击冷却时间（秒）
 
 # === 状态变量 ===
 var is_on_ground: bool = false
@@ -22,6 +24,8 @@ var hurt_timer: float = 0.0
 var jump_count: int = 0  # 跳跃次数（用于二段跳）
 var max_jumps: int = 2  # 最大跳跃次数
 var current_health: int = 3  # 当前生命值
+var shoot_timer: float = 0.0  # 射击冷却计时器
+var is_shooting: bool = false  # 是否正在射击
 
 # === 节点引用 ===
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -45,6 +49,8 @@ func _physics_process(delta: float) -> void:
 		hurt_timer -= delta
 	else:
 		is_hurt = false
+	if shoot_timer > 0:
+		shoot_timer -= delta
 	
 	# 应用重力
 	if not is_on_floor():
@@ -58,6 +64,10 @@ func _physics_process(delta: float) -> void:
 	# 跳跃缓冲
 	if Input.is_action_just_pressed("jump"):
 		jump_buffer_timer = jump_buffer_time
+	
+	# 射击处理
+	if can_shoot and Input.is_action_pressed("shoot"):
+		_try_shoot(direction)
 	
 	# 水平移动
 	if direction:
@@ -184,3 +194,80 @@ func reset_position(position: Vector2) -> void:
 func set_animation_speed(animation_name: String, fps: float) -> void:
 	if animated_sprite and animated_sprite.sprite_frames.has_animation(animation_name):
 		animated_sprite.sprite_frames.set_animation_speed(animation_name, fps)
+
+
+## 尝试射击
+func _try_shoot(facing_direction: float) -> void:
+	if shoot_timer > 0:
+		return
+	
+	# 确定射击方向（如果没有面向，则默认向右）
+	var shoot_dir: int = 1
+	if facing_direction != 0:
+		shoot_dir = int(sign(facing_direction))
+	elif animated_sprite and animated_sprite.flip_h:
+		shoot_dir = -1
+	
+	# 发射子弹
+	_shoot(shoot_dir)
+	
+	# 重置冷却时间
+	shoot_timer = shoot_cooldown
+
+
+## 发射子弹
+func _shoot(direction: int) -> void:
+	# 加载子弹预制件
+	var bullet_scene = load("res://scenes/bullet.tscn")
+	if not bullet_scene:
+		print("错误：无法加载子弹预制件")
+		return
+	
+	# 实例化子弹
+	var bullet = bullet_scene.instantiate()
+	
+	# 设置子弹位置（从玩家位置发射）
+	var bullet_start_pos = global_position
+	bullet_start_pos.x += direction * 30  # 从玩家前方发射
+	bullet_start_pos.y -= 10  # 稍微向上调整
+	
+	# 初始化子弹
+	if bullet.has_method("initialize"):
+		bullet.initialize(bullet_start_pos, direction)
+	
+	# 添加到场景树
+	get_tree().current_scene.add_child(bullet)
+	
+	print("发射子弹！方向：", "右" if direction > 0 else "左")
+	
+	# 播放射击动画
+	_play_shoot_animation()
+
+
+## 播放射击动画
+func _play_shoot_animation() -> void:
+	if not animated_sprite or not can_shoot:
+		return
+	
+	var anim_name = "shoot_stand"
+	
+	# 根据状态选择动画
+	if not is_on_floor():
+		anim_name = "shoot_jump"
+	elif abs(velocity.x) > 10:
+		anim_name = "shoot_run"
+	else:
+		anim_name = "shoot_stand"
+	
+	# 检查动画是否存在
+	if animated_sprite.sprite_frames.has_animation(anim_name):
+		animated_sprite.play(anim_name)
+	else:
+		# 如果射击动画不存在，使用普通动画
+		_update_animation(Input.get_axis("move_left", "move_right"))
+
+
+## 更新射击冷却
+func _update_shoot_cooldown(delta: float) -> void:
+	if shoot_timer > 0:
+		shoot_timer -= delta

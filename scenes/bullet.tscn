@@ -1,0 +1,23 @@
+[gd_scene format=4 uid="uid://bullet1234567890"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_script"]
+[ext_resource type="SpriteFrames" uid="uid://bullet123456789" path="res://resources/bullet_sprites.tres" id="2_sprites"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bullet"]
+size = Vector2(20, 6)
+
+[node name="Bullet" type="Area2D" groups=["bullet"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+sprite_frames = ExtResource("2_sprites")
+animation = &"default"
+autoplay = "default"
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bullet")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

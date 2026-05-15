@@ -19,6 +19,10 @@ var direction: int = 1
 var player: Node2D = null
 var is_dead: bool = false
 
+# === 节点引用 ===
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
 
 func _ready() -> void:
 	start_position = position
@@ -118,6 +122,36 @@ func die() -> void:
 	# 延迟后移除
 	await get_tree().create_timer(0.5).timeout
 	queue_free()
+
+
+## 受伤箱碰撞处理
+func _on_hurt_box_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") and not is_dead:
+		# 对玩家造成伤害
+		if body.has_method("take_damage"):
+			body.take_damage(damage, sign(body.global_position.x - global_position.x))
+
+
+## 攻击区域碰撞处理
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") and current_state == State.CHASE:
+		# 播放攻击动画
+		if animated_sprite and not animated_sprite.is_playing():
+			animated_sprite.play("attack")
+
+
+## 动画完成处理
+func _on_animation_finished() -> void:
+	if is_dead:
+		return
+	
+	# 攻击动画完成后返回巡逻或追踪状态
+	if animated_sprite and animated_sprite.animation == "attack":
+		if player and global_position.distance_to(player.global_position) <= detect_range:
+			current_state = State.CHASE
+		else:
+			current_state = State.PATROL
+			animated_sprite.play("walk")
 
 
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:
