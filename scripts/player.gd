@@ -21,10 +21,15 @@ var is_hurt: bool = false
 var hurt_timer: float = 0.0
 var jump_count: int = 0  # 跳跃次数（用于二段跳）
 var max_jumps: int = 2  # 最大跳跃次数
+var current_health: int = 3  # 当前生命值
 
 # === 节点引用 ===
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
+# 添加到 player 组
+func _ready() -> void:
+	add_to_group("player")
 
 
 func _physics_process(delta: float) -> void:
@@ -123,15 +128,28 @@ func take_damage(amount: int, knockback_direction: float = 0) -> void:
 	is_hurt = true
 	hurt_timer = 0.5  # 受伤无敌时间 0.5 秒
 	
+	# 减少生命值
+	current_health -= amount
+	if current_health < 0:
+		current_health = 0
+	
 	# 添加击退
 	if knockback_direction != 0:
 		velocity.x = knockback_direction * 300
 		velocity.y = -200
 	
-	# TODO: 实现血量系统
-	print("玩家受到 %d 点伤害" % amount)
+	print("玩家受到 %d 点伤害，剩余生命: %d" % [amount, current_health])
 	
-	_update_animation(0)
+	# 通知 HUD
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud and hud.has_method("take_damage"):
+		hud.take_damage(amount)
+	
+	# 如果生命值为 0，死亡
+	if current_health <= 0:
+		die()
+	else:
+		_update_animation(0)
 
 
 ## 死亡
@@ -155,6 +173,7 @@ func reset_position(position: Vector2) -> void:
 	velocity = Vector2.ZERO
 	is_dead = false
 	is_hurt = false
+	current_health = 3  # 重置生命值
 	collision_shape.disabled = false
 	
 	if animated_sprite:

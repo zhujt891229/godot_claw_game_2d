@@ -6,6 +6,7 @@ extends Node2D
 @export var player_scene: PackedScene
 @export var spawn_points: Array[Node2D] = []
 @export var current_spawn_index: int = 0
+@export var next_level_scene: PackedScene = null
 
 var player: Node2D = null
 var checkpoints: Array[Vector2] = []
@@ -13,6 +14,9 @@ var current_checkpoint: int = 0
 
 
 func _ready() -> void:
+	# 添加到组
+	add_to_group("level_manager")
+	
 	# 自动查找出生点
 	if spawn_points.is_empty():
 		var points = get_tree().get_nodes_in_group("spawn_point")
@@ -103,3 +107,22 @@ func next_spawn_point() -> void:
 ## 切换到上一个出生点
 func prev_spawn_point() -> void:
 	current_spawn_index = (current_spawn_index - 1 + spawn_points.size()) % spawn_points.size()
+
+
+## 关卡完成处理
+func on_level_complete() -> void:
+	print("关卡完成！")
+	
+	# 显示消息
+	var hud = get_tree().get_first_node_in_group("hud")
+	if hud and hud.has_method("show_message"):
+		hud.show_message("关卡完成！", 2.0)
+	
+	# 延迟后切换关卡
+	await get_tree().create_timer(2.0).timeout
+	
+	if next_level_scene:
+		get_tree().change_scene_to_packed(next_level_scene)
+	else:
+		print("没有下一关，返回主菜单")
+		# TODO: 返回主菜单

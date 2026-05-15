@@ -1,3 +1,282 @@
-[gd_scene format=3 uid="uid://u1ycgndcla4p"]
+[gd_scene format=4 uid="uid://level02abc"]
 
-[node name="Level02" type="Node2D" unique_id=1941123012]
+[ext_resource type="PackedScene" uid="uid://cgxq8jcnof14q" path="res://scenes/player.tscn" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://dhiaugx0yxtf0" path="res://assets/sprites/Asset/Tilemap/Tilemap_ProjectLittleAdventurerAndie2D.png" id="2_texture"]
+[ext_resource type="Script" path="res://scripts/flag.gd" id="3_flag"]
+[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="4_hud"]
+[ext_resource type="Script" path="res://scripts/level_manager.gd" id="5_level_manager"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Background/00_ProjectLittleAdventurerAndie2D.png" id="6_bg_sky"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Background/01_ProjectLittleAdventurerAndie2D.png" id="7_bg_mountain_far"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Background/02_ProjectLittleAdventurerAndie2D.png" id="8_bg_mountain_mid"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Background/03_ProjectLittleAdventurerAndie2D.png" id="9_bg_trees_far"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Background/04_ProjectLittleAdventurerAndie2D.png" id="10_bg_trees_mid"]
+[ext_resource type="Texture2D" path="res://assets/sprites/Asset/Background/CloseBackground/CBG01_ProjectLittleAdventurerAndie2D.png" id="11_bg_close"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(1000, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_platform"]
+size = Vector2(96, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_checkpoint"]
+size = Vector2(32, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spike"]
+size = Vector2(16, 16)
+
+[node name="Level02" type="Node2D" unique_id=2079575398]
+script = ExtResource("5_level_manager")
+
+; HUD
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+; 视差背景层
+[node name="ParallaxBackground" type="Parallax2D" parent="." unique_id=840277550]
+
+; 天空层 - 最远景，几乎不动
+[node name="SkyLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=840277551]
+motion_scale = Vector2(0.0, 0.0)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="SkySprite" type="Sprite2D" parent="ParallaxBackground/SkyLayer" unique_id=840277552]
+position = Vector2(0, -100)
+texture = ExtResource("6_bg_sky")
+scale = Vector2(2, 2)
+
+; 远山层 - 极慢速移动
+[node name="MountainFarLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=840277553]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1920, 0)
+position = Vector2(0, 50)
+
+[node name="MountainFarSprite" type="Sprite2D" parent="ParallaxBackground/MountainFarLayer" unique_id=840277554]
+position = Vector2(0, 0)
+texture = ExtResource("7_bg_mountain_far")
+scale = Vector2(2, 2)
+
+; 中山层 - 慢速移动
+[node name="MountainMidLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=840277555]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1920, 0)
+position = Vector2(0, 80)
+
+[node name="MountainMidSprite" type="Sprite2D" parent="ParallaxBackground/MountainMidLayer" unique_id=840277556]
+position = Vector2(0, 0)
+texture = ExtResource("8_bg_mountain_mid")
+scale = Vector2(2, 2)
+
+; 远树层 - 中慢速移动
+[node name="TreesFarLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=840277557]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1920, 0)
+position = Vector2(0, 100)
+
+[node name="TreesFarSprite" type="Sprite2D" parent="ParallaxBackground/TreesFarLayer" unique_id=840277558]
+position = Vector2(0, 0)
+texture = ExtResource("9_bg_trees_far")
+scale = Vector2(2, 2)
+
+; 近树层 - 中速移动
+[node name="TreesMidLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=840277559]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 0)
+position = Vector2(0, 120)
+
+[node name="TreesMidSprite" type="Sprite2D" parent="ParallaxBackground/TreesMidLayer" unique_id=840277560]
+position = Vector2(0, 0)
+texture = ExtResource("10_bg_trees_mid")
+scale = Vector2(2, 2)
+
+; 近景层 - 较快移动（前景装饰）
+[node name="CloseLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=840277561]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1920, 0)
+position = Vector2(0, 140)
+
+[node name="CloseSprite" type="Sprite2D" parent="ParallaxBackground/CloseLayer" unique_id=840277562]
+position = Vector2(0, 0)
+texture = ExtResource("11_bg_close")
+scale = Vector2(2, 2)
+
+; 主地面（更长）
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1404074762]
+position = Vector2(0, 200)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=1913383226]
+texture = ExtResource("2_texture")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 16)
+scale = Vector2(15.625, 1)
+modulate = Color(0.4, 0.5, 0.7, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=530174642]
+shape = SubResource("RectangleShape2D_ground")
+
+; 平台布局（更有挑战性）
+[node name="Platform1" type="StaticBody2D" parent="." unique_id=1000000100]
+position = Vector2(-300, 120)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform1" unique_id=1000000101]
+texture = ExtResource("2_texture")
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 16)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 0.4, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=1000000102]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Platform2" type="StaticBody2D" parent="." unique_id=1000000103]
+position = Vector2(-100, 40)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2" unique_id=1000000104]
+texture = ExtResource("2_texture")
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 16)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 0.4, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=1000000105]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Platform3" type="StaticBody2D" parent="." unique_id=1000000106]
+position = Vector2(100, -40)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform3" unique_id=1000000107]
+texture = ExtResource("2_texture")
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 16)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 0.4, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1000000108]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Platform4" type="StaticBody2D" parent="." unique_id=1000000109]
+position = Vector2(300, 40)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform4" unique_id=1000000110]
+texture = ExtResource("2_texture")
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 16)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 0.4, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4" unique_id=1000000111]
+shape = SubResource("RectangleShape2D_platform")
+
+[node name="Platform5" type="StaticBody2D" parent="." unique_id=1000000112]
+position = Vector2(500, -60)
+collision_layer = 3
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform5" unique_id=1000000113]
+texture = ExtResource("2_texture")
+region_enabled = true
+region_rect = Rect2(0, 64, 64, 16)
+scale = Vector2(1.5, 1)
+modulate = Color(0.6, 0.4, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform5" unique_id=1000000114]
+shape = SubResource("RectangleShape2D_platform")
+
+; 检查点
+[node name="Checkpoint1" type="Area2D" parent="." unique_id=1000000120]
+position = Vector2(0, -100)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Checkpoint1" unique_id=1000000121]
+modulate = Color(1, 0.8, 0.2, 1)
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1" unique_id=1000000122]
+shape = SubResource("RectangleShape2D_checkpoint")
+
+; 尖刺陷阱（更多）
+[node name="Spike1" type="Area2D" parent="." unique_id=1000000130]
+position = Vector2(-150, 184)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike1" unique_id=1000000131]
+modulate = Color(0.8, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike1" unique_id=1000000132]
+shape = SubResource("RectangleShape2D_spike")
+
+[node name="Spike2" type="Area2D" parent="." unique_id=1000000133]
+position = Vector2(50, 184)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike2" unique_id=1000000134]
+modulate = Color(0.8, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike2" unique_id=1000000135]
+shape = SubResource("RectangleShape2D_spike")
+
+[node name="Spike3" type="Area2D" parent="." unique_id=1000000136]
+position = Vector2(250, 184)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike3" unique_id=1000000137]
+modulate = Color(0.8, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike3" unique_id=1000000138]
+shape = SubResource("RectangleShape2D_spike")
+
+[node name="Spike4" type="Area2D" parent="." unique_id=1000000139]
+position = Vector2(400, 184)
+collision_layer = 0
+collision_mask = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Spike4" unique_id=1000000140]
+modulate = Color(0.8, 0.2, 0.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spike4" unique_id=1000000141]
+shape = SubResource("RectangleShape2D_spike")
+
+; 相机
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1000000150]
+limit_left = -1200
+limit_top = -540
+limit_right = 1200
+limit_bottom = 540
+position_smoothing_enabled = true
+position_smoothing_speed = 5.0
+
+; 终点旗帜
+[node name="Flag" type="Area2D" parent="." unique_id=1000000160]
+position = Vector2(800, -100)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("3_flag")
+victory_message = "恭喜！关卡 2 完成！"
+
+[node name="Sprite2D" type="Sprite2D" parent="Flag" unique_id=1000000161]
+modulate = Color(0.2, 1, 0.2, 1)
+scale = Vector2(1, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flag" unique_id=1000000162]
+shape = SubResource("RectangleShape2D_checkpoint")
+
+[node name="Flag/Label" type="Label" parent="Flag" unique_id=1000000163]
+offset_left = -30.0
+offset_top = -40.0
+offset_right = 30.0
+offset_bottom = -10.0
+text = "终点"
+horizontal_alignment = 1
+vertical_alignment = 1
